@@ -61,7 +61,7 @@ async function autenticarJuiz(){
   }catch(e){$('loginerr').textContent='Não foi possível validar o acesso à planilha.';$('loginerr').classList.remove('hide')}
 }
 $('enter').onclick=autenticarJuiz;$('pass').onkeydown=e=>{if(e.key==='Enter')autenticarJuiz()};
-const identidade=document.createElement('style');identidade.textContent='.logo{padding:0!important;background:transparent!important;border-radius:0!important;mix-blend-mode:screen}footer span{display:inline-block;margin-top:5px;font-size:.9em;opacity:.88}#public .info li{margin:18px 0 22px;padding-left:8px;line-height:1.45}#public .info li b{display:inline-block;color:#b20d1a;font-size:1.08rem;line-height:1.25;margin-bottom:9px;padding:5px 0 5px 10px;border-left:4px solid #d92c2c;letter-spacing:.01em}';document.head.appendChild(identidade);
+const identidade=document.createElement('style');identidade.textContent='.logo{padding:0!important;background:transparent!important;border-radius:0!important;mix-blend-mode:screen}footer span{display:inline-block;margin-top:5px;font-size:.9em;opacity:.88}#public .info li{margin:18px 0 22px;padding-left:8px;line-height:1.45}#public .info li b{display:inline-block;color:#b20d1a;font-size:1.08rem;line-height:1.25;margin-bottom:9px;padding:5px 0 5px 10px;border-left:4px solid #d92c2c;letter-spacing:.01em}.all-evaluations{margin-top:28px;border-top:1px solid #d7d1c6;padding-top:14px}.all-evaluations summary{cursor:pointer;color:#071827;font-size:1.05rem;font-weight:bold}.report-filters{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.report-filters input,.report-filters select{margin:0;min-width:210px;flex:1}';document.head.appendChild(identidade);
 document.querySelector('footer').innerHTML='Processo Seletivo de Robótica<br><span>Técnicos: Ricardo Rodrigues e Gustavo Viana</span>';
 document.querySelector('.logo').src='sesi-logo.png';
 function montarInscricao(){
@@ -76,6 +76,8 @@ function montarInscricao(){
   pick='';format='';publicPick('projects','p');publicPick('formats','f');$('confirm').onclick=enviarInscricao;
 }montarInscricao();
 const campoTurma=$('pc');const selectTurma=document.createElement('select');selectTurma.id='pc';selectTurma.innerHTML='<option value="">Selecione sua turma</option><option>6º A</option><option>6º B</option><option>7º A</option><option>7º B</option><option>8º A</option><option>8º B</option><option>9º A</option><option>9º B</option>';campoTurma.replaceWith(selectTurma);
+const camposOcultos=document.createElement('style');camposOcultos.textContent='.fields div:has(#year),.fields div:has(#theme){display:none}';document.head.appendChild(camposOcultos);
+const resumoOriginal=summary;summary=function(){resumoOriginal();Array.from($('finfo').children).filter(item=>['Ano/Série','Tema'].includes(item.querySelector('b')?.textContent)).forEach(item=>item.remove())};
 async function carregarRelatorio(){
   let painel=$('reportPanel');
   if(!painel){
@@ -85,8 +87,13 @@ async function carregarRelatorio(){
   }
   try{
     const resposta=await fetch(API+'?action=relatorio');const dados=await resposta.json();
-    if(!dados.length){$('reportContent').innerHTML='<p>Ainda não há participantes inscritos ou avaliações finalizadas.</p>';return}
-    $('reportContent').innerHTML='<div style="overflow-x:auto"><table><thead><tr><th>Participante</th><th>Projeto</th><th>Juízes</th><th>Média final</th><th>Recomendações por juiz</th></tr></thead><tbody>'+dados.map((p,i)=>'<tr><td><b>'+(i+1)+'. '+p.aluno+'</b><br><small>'+p.turma+'</small></td><td>'+p.projeto+'</td><td>'+p.juizes+'</td><td><b>'+Number(p.media).toLocaleString('pt-BR',{maximumFractionDigits:2})+' / 100</b></td><td>'+(p.recomendacoes?.length?p.recomendacoes.map(r=>'<div style="margin-bottom:6px"><b>'+r.juiz+':</b> '+r.recomendacao+' <small>('+r.nota+'/100)</small></div>').join(''):'Sem avaliações')+'</td></tr>').join('')+'</tbody></table></div>';
+    const respostaAvaliacoes=await fetch(API+'?action=avaliacoes');const avaliacoes=await respostaAvaliacoes.json();
+    const resumo='<div style="overflow-x:auto"><table><thead><tr><th>Participante</th><th>Projeto</th><th>Juízes</th><th>Média final</th><th>Recomendações por juiz</th></tr></thead><tbody>'+dados.map((p,i)=>'<tr><td><b>'+(i+1)+'. '+p.aluno+'</b><br><small>'+p.turma+'</small></td><td>'+p.projeto+'</td><td>'+p.juizes+'</td><td><b>'+Number(p.media).toLocaleString('pt-BR',{maximumFractionDigits:2})+' / 100</b></td><td>'+(p.recomendacoes?.length?p.recomendacoes.map(r=>'<div style="margin-bottom:6px"><b>'+r.juiz+':</b> '+r.recomendacao+' <small>('+r.nota+'/100)</small></div>').join(''):'Sem avaliações')+'</td></tr>').join('')+'</tbody></table></div>';
+    const todas='<h3 style="margin-top:28px">Todas as avaliações registradas</h3><div style="overflow-x:auto"><table><thead><tr><th>Aluno</th><th>Juiz</th><th>Data</th><th>Nota</th><th>Classificação</th><th>Recomendação</th></tr></thead><tbody>'+ (avaliacoes.length?avaliacoes.map(a=>'<tr><td>'+ (a.Aluno||'Não informado')+'</td><td>'+ (a.Avaliador||'Não informado')+'</td><td>'+ (a.Data||'')+'</td><td><b>'+ (a['Nota Final']||0)+' / 100</b></td><td>'+ (a.Classificacao||'')+'</td><td>'+ (a.Recomendacao||'')+'</td></tr>').join(''):'<tr><td colspan="6">Nenhuma avaliação finalizada.</td></tr>')+'</tbody></table></div>';
+    $('reportContent').innerHTML=resumo+todas;
+    const tituloTodas=$('reportContent').querySelector('h3');const tabelaTodas=$('reportContent').querySelectorAll('table')[1];const caixa=tabelaTodas.parentElement;const detalhes=document.createElement('details');detalhes.className='all-evaluations';const resumoDetalhes=document.createElement('summary');resumoDetalhes.textContent='Ver avaliações individuais ('+avaliacoes.length+')';detalhes.appendChild(resumoDetalhes);
+    const filtros=document.createElement('div');filtros.className='report-filters';const busca=document.createElement('input');busca.placeholder='Filtrar por aluno...';const filtroJuiz=document.createElement('select');filtroJuiz.innerHTML='<option value="">Todos os juízes</option>'+[...new Set(avaliacoes.map(a=>a.Avaliador||''))].filter(Boolean).map(j=>'<option>'+j+'</option>').join('');filtros.append(busca,filtroJuiz);detalhes.append(filtros,caixa);tituloTodas.replaceWith(detalhes);
+    const filtrar=()=>Array.from(tabelaTodas.tBodies[0].rows).forEach(linha=>{const texto=linha.cells[0]?.textContent.toLowerCase()||'';const juiz=linha.cells[1]?.textContent||'';linha.style.display=(texto.includes(busca.value.toLowerCase())&&(!filtroJuiz.value||juiz===filtroJuiz.value))?'':'none'});busca.oninput=filtrar;filtroJuiz.onchange=filtrar;
   }catch(e){$('reportContent').innerHTML='<p>Não foi possível carregar o relatório da planilha.</p>'}
 }
 </script></body></html>
