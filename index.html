@@ -82,18 +82,32 @@ async function carregarRelatorio(){
   let painel=$('reportPanel');
   if(!painel){
     painel=document.createElement('article');painel.id='reportPanel';painel.className='card';
-    painel.innerHTML='<div class="head"><div><h2>Relatório consolidado</h2><p>Média das avaliações e recomendações de cada juiz.</p></div><button class="btn alt" id="refreshReport">Atualizar relatório</button></div><div id="reportContent">Carregando dados...</div>';
-    $('form').querySelector('.head').after(painel);$('refreshReport').onclick=carregarRelatorio;
+    painel.innerHTML='<div class="head"><div><h2>Relatório consolidado</h2><p>Média das avaliações e recomendações de cada juiz.</p></div><div class="actions"><button class="btn alt" id="refreshReport">Atualizar relatório</button><button class="btn" id="exportReport">Exportar para Excel</button></div></div><div id="reportContent">Carregando dados...</div>';
+    $('form').querySelector('.head').after(painel);$('refreshReport').onclick=carregarRelatorio;$('exportReport').onclick=exportarRelatorio;
   }
   try{
-    const resposta=await fetch(API+'?action=relatorio');const dados=await resposta.json();
+    const resposta=await fetch(API+'?action=relatorio');const dados=await resposta.json();dados.sort((a,b)=>Number(b.media)-Number(a.media)||Number(b.juizes)-Number(a.juizes)||String(a.aluno).localeCompare(String(b.aluno),'pt-BR'));
     const respostaAvaliacoes=await fetch(API+'?action=avaliacoes');const avaliacoes=await respostaAvaliacoes.json();
     const resumo='<div style="overflow-x:auto"><table><thead><tr><th>Participante</th><th>Projeto</th><th>Juízes</th><th>Média final</th><th>Recomendações por juiz</th></tr></thead><tbody>'+dados.map((p,i)=>'<tr><td><b>'+(i+1)+'. '+p.aluno+'</b><br><small>'+p.turma+'</small></td><td>'+p.projeto+'</td><td>'+p.juizes+'</td><td><b>'+Number(p.media).toLocaleString('pt-BR',{maximumFractionDigits:2})+' / 100</b></td><td>'+(p.recomendacoes?.length?p.recomendacoes.map(r=>'<div style="margin-bottom:6px"><b>'+r.juiz+':</b> '+r.recomendacao+' <small>('+r.nota+'/100)</small></div>').join(''):'Sem avaliações')+'</td></tr>').join('')+'</tbody></table></div>';
     const todas='<h3 style="margin-top:28px">Todas as avaliações registradas</h3><div style="overflow-x:auto"><table><thead><tr><th>Aluno</th><th>Juiz</th><th>Data</th><th>Nota</th><th>Classificação</th><th>Recomendação</th></tr></thead><tbody>'+ (avaliacoes.length?avaliacoes.map(a=>'<tr><td>'+ (a.Aluno||'Não informado')+'</td><td>'+ (a.Avaliador||'Não informado')+'</td><td>'+ (a.Data||'')+'</td><td><b>'+ (a['Nota Final']||0)+' / 100</b></td><td>'+ (a.Classificacao||'')+'</td><td>'+ (a.Recomendacao||'')+'</td></tr>').join(''):'<tr><td colspan="6">Nenhuma avaliação finalizada.</td></tr>')+'</tbody></table></div>';
     $('reportContent').innerHTML=resumo+todas;
+    const tabelaResumo=$('reportContent').querySelector('table');Array.from(tabelaResumo.tBodies[0].rows).forEach((linha,i)=>{linha.cells[0].querySelector('b').innerHTML=(i+1)+'º · '+linha.cells[0].querySelector('b').textContent.replace(/^\d+\.\s*/,'')});
+    const filtrosResumo=document.createElement('div');filtrosResumo.className='report-filters';const filtroTurma=document.createElement('select');const filtroProjeto=document.createElement('select');filtroTurma.innerHTML='<option value="">Todas as turmas</option>'+[...new Set(dados.map(p=>p.turma||''))].filter(Boolean).sort().map(t=>'<option>'+t+'</option>').join('');filtroProjeto.innerHTML='<option value="">Todos os projetos</option>'+[...new Set(dados.map(p=>p.projeto||''))].filter(Boolean).sort().map(p=>'<option>'+p+'</option>').join('');filtrosResumo.append(filtroTurma,filtroProjeto);tabelaResumo.parentElement.before(filtrosResumo);
+    const filtrarResumo=()=>Array.from(tabelaResumo.tBodies[0].rows).forEach((linha,i)=>{const participante=dados[i];linha.style.display=(!filtroTurma.value||participante.turma===filtroTurma.value)&&(!filtroProjeto.value||participante.projeto===filtroProjeto.value)?'':'none'});filtroTurma.onchange=filtrarResumo;filtroProjeto.onchange=filtrarResumo;
     const tituloTodas=$('reportContent').querySelector('h3');const tabelaTodas=$('reportContent').querySelectorAll('table')[1];const caixa=tabelaTodas.parentElement;const detalhes=document.createElement('details');detalhes.className='all-evaluations';const resumoDetalhes=document.createElement('summary');resumoDetalhes.textContent='Ver avaliações individuais ('+avaliacoes.length+')';detalhes.appendChild(resumoDetalhes);
     const filtros=document.createElement('div');filtros.className='report-filters';const busca=document.createElement('input');busca.placeholder='Filtrar por aluno...';const filtroJuiz=document.createElement('select');filtroJuiz.innerHTML='<option value="">Todos os juízes</option>'+[...new Set(avaliacoes.map(a=>a.Avaliador||''))].filter(Boolean).map(j=>'<option>'+j+'</option>').join('');filtros.append(busca,filtroJuiz);detalhes.append(filtros,caixa);tituloTodas.replaceWith(detalhes);
     const filtrar=()=>Array.from(tabelaTodas.tBodies[0].rows).forEach(linha=>{const texto=linha.cells[0]?.textContent.toLowerCase()||'';const juiz=linha.cells[1]?.textContent||'';linha.style.display=(texto.includes(busca.value.toLowerCase())&&(!filtroJuiz.value||juiz===filtroJuiz.value))?'':'none'});busca.oninput=filtrar;filtroJuiz.onchange=filtrar;
   }catch(e){$('reportContent').innerHTML='<p>Não foi possível carregar o relatório da planilha.</p>'}
+}
+async function exportarRelatorio(){
+  try{
+    const [resumoResposta,avaliacoesResposta]=await Promise.all([fetch(API+'?action=relatorio'),fetch(API+'?action=avaliacoes')]);const resumo=await resumoResposta.json();const avaliacoes=await avaliacoesResposta.json();
+    resumo.sort((a,b)=>Number(b.media)-Number(a.media)||Number(b.juizes)-Number(a.juizes)||String(a.aluno).localeCompare(String(b.aluno),'pt-BR'));
+    const linhas=[['Ranking','Aluno','Turma','Projeto','Quantidade de juízes','Média final','Juiz','Nota do juiz','Recomendação']];
+    resumo.forEach((p,i)=>{const recomendacoes=p.recomendacoes?.length?p.recomendacoes:[{}];recomendacoes.forEach(r=>linhas.push([i+1,p.aluno,p.turma,p.projeto,p.juizes,p.media,r.juiz||'',r.nota??'',r.recomendacao||'']))});
+    linhas.push([],['Avaliações individuais'],['Aluno','Juiz','Data','Nota','Classificação','Recomendação']);
+    avaliacoes.forEach(a=>linhas.push([a.Aluno||'',a.Avaliador||'',a.Data||'',a['Nota Final']||'',a.Classificacao||'',a.Recomendacao||'']));
+    const csv='\uFEFF'+linhas.map(l=>l.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\n');const arquivo=new Blob([csv],{type:'text/csv;charset=utf-8'});const link=document.createElement('a');link.href=URL.createObjectURL(arquivo);link.download='relatorio-robotica.csv';link.click();URL.revokeObjectURL(link.href);
+  }catch(e){alert('Não foi possível exportar o relatório.')}
 }
 </script></body></html>
