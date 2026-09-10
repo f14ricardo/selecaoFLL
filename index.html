@@ -274,6 +274,9 @@
       <label for="nome">Nome do aluno</label>
       <input type="text" id="nome" placeholder="Digite seu nome completo" />
 
+      <label for="email">E-mail</label>
+      <input type="email" id="email" placeholder="Digite seu e-mail" />
+
       <label for="turma">Turma</label>
       <select id="turma">
         <option value="">Selecione sua turma</option>
@@ -404,11 +407,19 @@
 
     function confirmarEscolha() {
       const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
       const turma = document.getElementById("turma").value.trim();
       const resultado = document.getElementById("resultado");
 
-      if (!nome || !turma) {
-        alert("Preencha seu nome e sua turma.");
+      if (!nome || !email || !turma) {
+        alert("Preencha seu nome completo, e-mail e turma.");
+        return;
+      }
+
+      const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!emailValido) {
+        alert("Digite um e-mail válido.");
         return;
       }
 
@@ -427,6 +438,7 @@
       resultado.innerHTML = `
         <strong>Escolha registrada!</strong><br><br>
         Aluno: ${nome}<br>
+        E-mail: ${email}<br>
         Turma: ${turma}<br>
         Projeto escolhido: <strong>${projetoSelecionado}</strong><br>
         Formato da apresentação: <strong>${formatoSelecionado}</strong><br><br>
