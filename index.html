@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Processo Seletivo - Robótica</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    header {
+      background: #e30613;
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin-bottom: 8px;
+      font-size: 28px;
+    }
+
+    header p {
+      opacity: 0.95;
+    }
+
+    .logo-sesi {
+      width: 150px;
+      max-width: 70%;
+      height: auto;
+      display: block;
+      margin: 0 auto 18px;
+      background: white;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .container {
+      width: min(1000px, 92%);
+      margin: 30px auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      border-top: 4px solid #e30613;
+    }
+
+    .card h2 {
+      margin-bottom: 12px;
+      color: #e30613;
+    }
+
+    .info {
+      line-height: 1.6;
+    }
+
+    .projetos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .projeto {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+      background: #fff;
+    }
+
+    .projeto:hover {
+      border-color: #e30613;
+      transform: translateY(-2px);
+    }
+
+    .projeto.selecionado {
+      border-color: #e30613;
+      background: #fff0f1;
+    }
+
+    .projeto h3 {
+      margin-bottom: 10px;
+      color: #e30613;
+    }
+
+    .projeto p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      font-size: 15px;
+      background: white;
+    }
+
+    .formato-apresentacao {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 10px 0 18px;
+    }
+
+    .opcao-apresentacao {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+      background: #fff;
+    }
+
+    .opcao-apresentacao:hover {
+      border-color: #e30613;
+    }
+
+    .opcao-apresentacao.selecionado {
+      border-color: #e30613;
+      background: #fff0f1;
+    }
+
+    .opcao-apresentacao h3 {
+      margin-bottom: 6px;
+      color: #e30613;
+    }
+
+    .opcao-apresentacao p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      padding: 13px;
+      background: #e30613;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #b8000a;
+    }
+
+    .resultado {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      background: #e8f5e9;
+      border-left: 5px solid #2e7d32;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+
+    .etapas {
+      margin-top: 10px;
+      padding-left: 22px;
+      line-height: 1.6;
+    }
+
+    .etapas li {
+      margin-bottom: 16px;
+      padding-left: 4px;
+    }
+
+    .etapas strong {
+      color: #e30613;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #555;
+      font-size: 14px;
+      border-top: 3px solid #e30613;
+      background: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <img
+      class="logo-sesi"
+      src="https://mogidascruzes.sesisp.org.br/images/logo-sesi-bot.jpg"
+      alt="Logo SESI"
+    />
+    <h1>Processo Seletivo da Robótica</h1>
+    <p>Faça parte da Equipe de Robótica da Escola SESI Milton Sobrosa Cordeiro</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>Como funciona?</h2>
+      <div class="info">
+        <p>
+          Escolha uma das propostas abaixo. Depois, desenvolva sua ideia,
+          pesquise o problema, pense em uma solução e prepare uma apresentação
+          de até 5 minutos.
+        </p>
+        <p><strong>Apresentação:</strong> 26 de Outubro a 30 de Outubro.</p>
+        <p><strong>Formato:</strong> Individual.</p>
+        <p><strong>Dúvidas:</strong> Procurar o OED Ricardo ou TLD Gustavo Viana.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>1. Escolha seu projeto</h2>
+
+      <div class="projetos">
+
+        <div class="projeto" data-projeto="Estação IoT de Monitoramento Inteligente">
+          <h3>Projeto 1</h3>
+          <p><strong>Estação IoT de Monitoramento Inteligente</strong></p>
+          <p>Monitorar temperatura, umidade, luminosidade e qualidade do ar utilizando sensores.</p>
+        </div>
+
+        <div class="projeto" data-projeto="Linha de Produção Automatizada com Esteira">
+          <h3>Projeto 2</h3>
+          <p><strong>Linha de Produção Automatizada</strong></p>
+          <p>Criar uma esteira que detecta e separa objetos automaticamente.</p>
+        </div>
+
+        <div class="projeto" data-projeto="Estufa Inteligente com Controle Climático">
+          <h3>Projeto 3</h3>
+          <p><strong>Estufa Inteligente</strong></p>
+          <p>Controlar temperatura, umidade e irrigação de uma estufa automaticamente.</p>
+        </div>
+
+        <div class="projeto" data-projeto="Robô Autônomo de Navegação Inteligente">
+          <h3>Projeto 4</h3>
+          <p><strong>Robô Autônomo</strong></p>
+          <p>Criar um robô capaz de seguir linha, detectar obstáculos e decidir uma rota.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Identificação</h2>
+
+      <label for="nome">Nome do aluno</label>
+      <input type="text" id="nome" placeholder="Digite seu nome completo" />
+
+      <label for="turma">Turma</label>
+      <select id="turma">
+        <option value="">Selecione sua turma</option>
+        <option value="6A">6A</option>
+        <option value="6B">6B</option>
+        <option value="7A">7A</option>
+        <option value="7B">7B</option>
+        <option value="8A">8A</option>
+        <option value="8B">8B</option>
+        <option value="9A">9A</option>
+        <option value="9B">9B</option>
+      </select>
+
+      <label>Formato da apresentação</label>
+
+      <div class="formato-apresentacao">
+        <div class="opcao-apresentacao" data-formato="Apresentação Física">
+          <h3>Apresentação Física</h3>
+          <p>Apresentação presencial utilizando materiais físicos, cartazes, protótipos ou outros recursos.</p>
+        </div>
+
+        <div class="opcao-apresentacao" data-formato="Ferramentas Online">
+          <h3>Ferramentas Online</h3>
+          <p>Apresentação utilizando PowerPoint ou outra ferramenta computacional de apresentação.</p>
+        </div>
+
+        <div class="opcao-apresentacao" data-formato="Apresentação Física e Online">
+          <h3>Apresentação Física e Online</h3>
+          <p>Apresentação combinando materiais físicos, protótipos ou cartazes com PowerPoint ou outras ferramentas online.</p>
+        </div>
+      </div>
+
+      <button onclick="confirmarEscolha()">Confirmar escolha</button>
+
+      <div class="resultado" id="resultado"></div>
+    </section>
+
+    <section class="card">
+      <h2>3. O que apresentar?</h2>
+
+      <ol class="etapas">
+        <li>
+          <strong>Definição do problema</strong><br>
+          Pesquise e explique qual problema será estudado, sua gravidade, suas causas e por que ele é importante.
+          A IA pode ser utilizada como apoio, mas não deve realizar toda a pesquisa.
+        </li>
+
+        <li>
+          <strong>Análise dos envolvidos / stakeholders</strong><br>
+          Identifique quem pode ser afetado ou se beneficiar da solução, como comunidade, empresas, organizações ou governos.
+          Considere as necessidades, perspectivas e limitações desses grupos.
+        </li>
+
+        <li>
+          <strong>Pesquisa técnica e prototipagem</strong><br>
+          Pesquise quais tecnologias existentes ou emergentes podem ser aplicadas ao projeto.
+          Apresente a base do protótipo, os testes realizados e possíveis melhorias feitas durante o desenvolvimento.
+        </li>
+
+        <li>
+          <strong>Desenvolvimento da solução</strong><br>
+          Explique como a solução foi desenvolvida, considerando a viabilidade técnica, os custos envolvidos e a possibilidade
+          de ampliar ou adaptar o projeto.
+        </li>
+
+        <li>
+          <strong>Implementação</strong><br>
+          Mostre como a solução poderia ser aplicada em uma situação real ou em escala local.
+          Indique também quais parcerias, recursos ou apoios seriam necessários.
+        </li>
+
+        <li>
+          <strong>Comunicação e divulgação</strong><br>
+          Explique como o projeto será apresentado ao público utilizando slides, folhetos, vídeos ou outros materiais.
+          Pense também em formas de divulgar o trabalho em eventos locais ou regionais.
+        </li>
+
+        <li>
+          <strong>Avaliação e melhorias</strong><br>
+          Mostre como seria possível medir o impacto da solução por meio de métricas e resultados práticos.
+          Apresente também os pontos que ainda podem ser melhorados e possíveis oportunidades futuras.
+        </li>
+
+        <li>
+          <strong>Conclusão</strong><br>
+          Faça um resumo da solução desenvolvida e apresente os principais resultados obtidos com o projeto.
+        </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    Processo Seletivo de Robótica
+  </footer>
+
+  <script>
+    let projetoSelecionado = "";
+    let formatoSelecionado = "";
+
+    const projetos = document.querySelectorAll(".projeto");
+
+    projetos.forEach(projeto => {
+      projeto.addEventListener("click", () => {
+
+        projetos.forEach(item => {
+          item.classList.remove("selecionado");
+        });
+
+        projeto.classList.add("selecionado");
+        projetoSelecionado = projeto.dataset.projeto;
+      });
+    });
+
+    const formatos = document.querySelectorAll(".opcao-apresentacao");
+
+    formatos.forEach(formato => {
+      formato.addEventListener("click", () => {
+
+        formatos.forEach(item => {
+          item.classList.remove("selecionado");
+        });
+
+        formato.classList.add("selecionado");
+        formatoSelecionado = formato.dataset.formato;
+      });
+    });
+
+    function confirmarEscolha() {
+      const nome = document.getElementById("nome").value.trim();
+      const turma = document.getElementById("turma").value.trim();
+      const resultado = document.getElementById("resultado");
+
+      if (!nome || !turma) {
+        alert("Preencha seu nome e sua turma.");
+        return;
+      }
+
+      if (!projetoSelecionado) {
+        alert("Escolha um projeto.");
+        return;
+      }
+
+      if (!formatoSelecionado) {
+        alert("Escolha o formato da apresentação.");
+        return;
+      }
+
+      resultado.style.display = "block";
+
+      resultado.innerHTML = `
+        <strong>Escolha registrada!</strong><br><br>
+        Aluno: ${nome}<br>
+        Turma: ${turma}<br>
+        Projeto escolhido: <strong>${projetoSelecionado}</strong><br>
+        Formato da apresentação: <strong>${formatoSelecionado}</strong><br><br>
+        Agora prepare sua proposta e sua apresentação.
+      `;
+
+      resultado.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  </script>
+
+</body>
+</html>
