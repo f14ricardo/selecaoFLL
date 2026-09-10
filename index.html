@@ -57,7 +57,7 @@ async function autenticarJuiz(){
     if(!dados.ok){$('loginerr').textContent='Login ou senha inválidos.';$('loginerr').classList.remove('hide');return}
     $('loginerr').classList.add('hide');$('login').classList.add('hide');$('form').classList.remove('hide');
     if(dados.nome)$('evaluator').value=dados.nome;
-    carregarInscritos();
+    carregarInscritos();carregarRelatorio();
   }catch(e){$('loginerr').textContent='Não foi possível validar o acesso à planilha.';$('loginerr').classList.remove('hide')}
 }
 $('enter').onclick=autenticarJuiz;$('pass').onkeydown=e=>{if(e.key==='Enter')autenticarJuiz()};
@@ -75,4 +75,18 @@ function montarInscricao(){
   <article class="card"><h2>3. O que apresentar?</h2><ol class="info"><li><b>Definição do problema</b><br>Pesquise e explique qual problema será estudado, sua gravidade, suas causas e por que ele é importante. A IA pode ser utilizada como apoio, mas não deve realizar toda a pesquisa.</li><li><b>Análise dos envolvidos / stakeholders</b><br>Identifique quem pode ser afetado ou se beneficiar da solução, como comunidade, empresas, organizações ou governos. Considere as necessidades, perspectivas e limitações desses grupos.</li><li><b>Pesquisa técnica e prototipagem</b><br>Pesquise quais tecnologias existentes ou emergentes podem ser aplicadas ao projeto. Apresente a base do protótipo, os testes realizados e possíveis melhorias feitas durante o desenvolvimento.</li><li><b>Desenvolvimento da solução</b><br>Explique como a solução foi desenvolvida, considerando a viabilidade técnica, os custos envolvidos e a possibilidade de ampliar ou adaptar o projeto.</li><li><b>Implementação</b><br>Mostre como a solução poderia ser aplicada em uma situação real ou em escala local. Indique também quais parcerias, recursos ou apoios seriam necessários.</li><li><b>Comunicação e divulgação</b><br>Explique como o projeto será apresentado ao público utilizando slides, folhetos, vídeos ou outros materiais. Pense também em formas de divulgar o trabalho em eventos locais ou regionais.</li><li><b>Avaliação e melhorias</b><br>Mostre como seria possível medir o impacto da solução por meio de métricas e resultados práticos. Apresente também os pontos que ainda podem ser melhorados e possíveis oportunidades futuras.</li><li><b>Conclusão</b><br>Faça um resumo da solução desenvolvida e apresente os principais resultados obtidos com o projeto.</li></ol></article>`;
   pick='';format='';publicPick('projects','p');publicPick('formats','f');$('confirm').onclick=enviarInscricao;
 }montarInscricao();
+const campoTurma=$('pc');const selectTurma=document.createElement('select');selectTurma.id='pc';selectTurma.innerHTML='<option value="">Selecione sua turma</option><option>6º A</option><option>6º B</option><option>7º A</option><option>7º B</option><option>8º A</option><option>8º B</option><option>9º A</option><option>9º B</option>';campoTurma.replaceWith(selectTurma);
+async function carregarRelatorio(){
+  let painel=$('reportPanel');
+  if(!painel){
+    painel=document.createElement('article');painel.id='reportPanel';painel.className='card';
+    painel.innerHTML='<div class="head"><div><h2>Relatório consolidado</h2><p>Média das avaliações e recomendações de cada juiz.</p></div><button class="btn alt" id="refreshReport">Atualizar relatório</button></div><div id="reportContent">Carregando dados...</div>';
+    $('form').querySelector('.head').after(painel);$('refreshReport').onclick=carregarRelatorio;
+  }
+  try{
+    const resposta=await fetch(API+'?action=relatorio');const dados=await resposta.json();
+    if(!dados.length){$('reportContent').innerHTML='<p>Ainda não há participantes inscritos ou avaliações finalizadas.</p>';return}
+    $('reportContent').innerHTML='<div style="overflow-x:auto"><table><thead><tr><th>Participante</th><th>Projeto</th><th>Juízes</th><th>Média final</th><th>Recomendações por juiz</th></tr></thead><tbody>'+dados.map((p,i)=>'<tr><td><b>'+(i+1)+'. '+p.aluno+'</b><br><small>'+p.turma+'</small></td><td>'+p.projeto+'</td><td>'+p.juizes+'</td><td><b>'+Number(p.media).toLocaleString('pt-BR',{maximumFractionDigits:2})+' / 100</b></td><td>'+(p.recomendacoes?.length?p.recomendacoes.map(r=>'<div style="margin-bottom:6px"><b>'+r.juiz+':</b> '+r.recomendacao+' <small>('+r.nota+'/100)</small></div>').join(''):'Sem avaliações')+'</td></tr>').join('')+'</tbody></table></div>';
+  }catch(e){$('reportContent').innerHTML='<p>Não foi possível carregar o relatório da planilha.</p>'}
+}
 </script></body></html>
