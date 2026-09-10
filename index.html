@@ -1,455 +1,67 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Processo Seletivo - Robótica</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Robótica SESI | Avaliação</title><style>
+:root{--n:#b20d1a;--b:#e30613;--l:#ead9db;--g:#16803c;--r:#a70812}*{box-sizing:border-box}html{overflow-x:hidden}body{margin:0;font-family:Arial,sans-serif;background:#faf6f6;color:#2d2021;overflow-x:hidden}header{background:linear-gradient(130deg,#b20d1a,#e30613);color:#fff;text-align:center;padding:25px 5%;position:relative}.logo{width:125px;max-width:55vw;background:#fff;border-radius:7px;padding:6px;display:block;margin:auto}h1{margin:9px 0 3px;font-size:clamp(1.4rem,4vw,2rem)}h2,h3{color:var(--n)}.nav{position:absolute;right:5%;top:25px}.wrap{width:min(1120px,92%);margin:28px auto}.card{min-width:0;background:#fff;border:1px solid var(--l);border-radius:13px;padding:20px;margin-bottom:17px;box-shadow:0 7px 22px #5a101014}.btn{border:0;border-radius:8px;background:var(--b);color:#fff;padding:11px 16px;font-weight:bold;cursor:pointer}.btn.alt{background:#f4e9ea;color:var(--n)}.btn.danger{background:var(--r)}.hide{display:none!important}label{display:block;font-weight:bold;margin:0 0 5px}input,select,textarea{width:100%;max-width:100%;padding:10px;border:1px solid #d5bec1;border-radius:7px;font:inherit;margin-bottom:12px}textarea{min-height:85px}.projects,.formats{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:12px}.choice{border:2px solid var(--l);padding:14px;border-radius:10px;cursor:pointer}.choice.on,.choice:hover{border-color:var(--b);background:#fff0f1}.ok{display:none;padding:14px;background:#eaf8ef;border-left:5px solid var(--g);margin-top:15px}.login{min-height:65vh;display:grid;place-items:center}.login .card{width:min(420px,92%)}.notice{font-size:.85rem;color:#76585b}.head{display:flex;justify-content:space-between;align-items:center;gap:10px}.grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.full{grid-column:1/-1}.criteria{display:grid;gap:13px}.criterion.missing{border:2px solid var(--r);background:#fff9f9}.ctop{display:flex;justify-content:space-between;gap:8px}.weight{color:var(--b);font-weight:bold;white-space:nowrap}.desc{color:#76585b;font-size:.9rem}.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.level{background:#fff;border:1px solid var(--l);border-radius:7px;padding:8px 3px;min-height:52px;cursor:pointer;font-size:.75rem;overflow-wrap:anywhere}.level.on{background:var(--b);border-color:var(--b);color:#fff}.score{font-size:2rem;font-weight:bold;color:var(--n)}.summary{position:sticky;top:15px}.bar{height:11px;background:#f0e1e2;border-radius:99px;overflow:hidden}.bar div{height:100%;background:var(--g);width:0;transition:.2s}.class{margin:12px 0;padding:10px;border-radius:7px;background:#fff0f1;color:var(--n);font-weight:bold}.competency{display:flex;justify-content:space-between;border-top:1px solid var(--l);padding:9px 0;gap:10px}.actions{display:flex;flex-wrap:wrap;gap:9px}.result{max-width:900px;margin:28px auto}.top{display:flex;justify-content:space-between;gap:10px}.finalscore{font-size:2rem;color:var(--g);font-weight:bold}.info{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}.info div{border-bottom:1px solid var(--l);padding:7px}.info b{display:block;font-size:.8rem;color:#76585b}table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid var(--l);padding:9px;overflow-wrap:anywhere}th:last-child,td:last-child{text-align:right}.notes div{padding:11px;background:#fff8f8;border-radius:7px;margin:8px 0}.notes b{display:block;color:var(--n)}footer{text-align:center;padding:22px;background:white;color:#76585b}@media(max-width:760px){header{padding:20px 4%}.nav{position:static;margin-top:14px}.nav .btn{width:100%;max-width:330px}.wrap{width:min(100% - 24px,1120px);margin:16px auto}.card{padding:16px;border-radius:10px}.grid{grid-template-columns:1fr}.summary{position:static;order:-1}.fields,.info{grid-template-columns:1fr}.levels{grid-template-columns:1fr 1fr}.level:last-child{grid-column:span 2}.head,.top{align-items:stretch;flex-direction:column}.head .btn,.actions .btn{flex:1}.finalscore{font-size:1.7rem}.result{margin:16px auto}.competency{font-size:.9rem}}@media(max-width:420px){.wrap{width:calc(100% - 16px)}.card{padding:13px}.levels{grid-template-columns:1fr}.level:last-child{grid-column:auto}.level{min-height:42px;text-align:left;padding:9px}.level br{display:none}.level b{margin-right:6px}.actions{display:grid;grid-template-columns:1fr}.actions .btn{width:100%}.ctop{flex-direction:column}.weight{white-space:normal}.competency{flex-direction:column;gap:2px}table,thead,tbody,tr,th,td{display:block}table thead{display:none}table tr{padding:10px 0;border-bottom:1px solid var(--l)}table td{border:0;padding:3px 0}table td:first-child{font-weight:bold;color:var(--n)}table td:last-child{text-align:left;font-weight:bold}table td:nth-child(2):before{content:'Comentário: ';font-weight:bold;color:#76585b}}@media print{header,footer,#public,#login,#form,.actions{display:none!important}#final{display:block!important}.result,.card{margin:0;box-shadow:none;border:0}.finalscore{color:#000}}
+header{background:#071827;padding:36px 5% 30px;border-bottom:7px solid #d92c2c;overflow:hidden}header:before{content:'✈';position:absolute;top:15px;left:calc(50% - 170px);font-size:2.7rem;color:#f4ecdc;transform:rotate(-8deg);opacity:.9}header:after{content:'';display:block;width:220px;height:9px;margin:16px auto 0;background:linear-gradient(90deg,#d92c2c 0 44%,transparent 44% 55%,#d92c2c 55%);box-shadow:0 14px 0 #0d4466}.logo{position:absolute;left:5%;top:20px;width:64px;max-width:none;padding:4px;border-radius:4px;opacity:.95}header h1{font-family:Impact,Arial Black,sans-serif;letter-spacing:.055em;font-size:clamp(2.3rem,8vw,4.6rem);line-height:.95;margin:28px 0 8px;color:#f4ecdc;text-transform:uppercase}header p{letter-spacing:.04em;color:#f4ecdc}.nav{top:23px}.nav .btn{background:#d92c2c;border:1px solid #f4ecdc}.nav .btn:hover{background:#b61f27}.card{border-color:#d7d1c6}.btn{background:#d92c2c}.btn:hover{background:#b61f27}.btn.alt{background:#eee9df;color:#071827}h2,h3,.score,.notes b{color:#071827}.choice.on,.choice:hover{border-color:#d92c2c;background:#fff5f1}.level.on{background:#d92c2c;border-color:#d92c2c}.weight{color:#b61f27}.class{color:#071827;background:#f5efe6}.bar div{background:#d92c2c}body{background:#f4f0e8;color:#17232d}.card{box-shadow:0 8px 24px rgba(7,24,39,.10)}footer{background:#071827;color:#f4ecdc;border-top:5px solid #d92c2c}@media(max-width:760px){header{padding-top:75px}.logo{left:16px;top:14px;width:54px}header:before{left:calc(50% - 115px);top:18px;font-size:2rem}.nav{top:14px;right:14px;margin:0}.nav .btn{width:auto;font-size:.82rem;padding:8px 10px}header h1{font-size:clamp(2.05rem,12vw,3rem);margin-top:16px}header:after{width:170px}}@media print{header,footer,#public,#login,#form,.actions{display:none!important}#final{display:block!important}.result,.card{margin:0;box-shadow:none;border:0}.finalscore{color:#000}}</style></head><body><header><img class="logo" src="https://mogidascruzes.sesisp.org.br/images/logo-sesi-bot.jpg" alt="SESI"><h1>Macgyvers</h1><p>Processo Seletivo da Robótica · Escola SESI Milton Sobrosa Cordeiro</p><div class="nav"><button class="btn" id="goLogin">Área administrativa</button></div></header><main>
+<section id="public" class="wrap"><article class="card"><h2>Como funciona?</h2><p>Escolha uma proposta, desenvolva sua ideia e prepare uma apresentação individual de até 5 minutos.</p></article><article class="card"><h2>1. Escolha seu projeto</h2><div class="projects" id="projects"><div class="choice" data-v="Estação IoT de Monitoramento Inteligente"><b>Projeto 1 — Estação IoT</b><br>Temperatura, umidade, luz e ar.</div><div class="choice" data-v="Linha de Produção Automatizada"><b>Projeto 2 — Linha automatizada</b><br>Esteira que detecta e separa objetos.</div><div class="choice" data-v="Estufa Inteligente"><b>Projeto 3 — Estufa inteligente</b><br>Clima e irrigação automáticos.</div><div class="choice" data-v="Robô Autônomo"><b>Projeto 4 — Robô autônomo</b><br>Linha, obstáculos e rotas.</div></div></article><article class="card"><h2>2. Identificação</h2><label>Nome do aluno</label><input id="pn"><label>E-mail</label><input id="pe" type="email"><label>Turma</label><input id="pc"><label>Formato da apresentação</label><div class="formats" id="formats"><div class="choice" data-v="Apresentação física">Apresentação física</div><div class="choice" data-v="Ferramentas online">Ferramentas online</div><div class="choice" data-v="Física e online">Física e online</div></div><br><button class="btn" id="confirm">Confirmar escolha</button><div class="ok" id="publicok"></div></article></section>
+<section id="login" class="hide login"><article class="card"><h2>Área administrativa</h2><div id="loginerr" class="hide" style="color:#a71d2a">Login ou senha inválidos.</div><label>Login</label><input id="user"><label>Senha</label><input id="pass" type="password"><button class="btn" id="enter">Entrar</button> <button class="btn alt" id="back">Voltar</button><p class="notice">Acesso provisório de página estática; não oferece proteção real de dados.</p></article></section>
+<section id="form" class="wrap hide"><div class="head"><div><h2>Rubrica de Avaliação de Projetos</h2><p>Total máximo: 100 pontos</p></div><button class="btn alt" id="exit">Sair</button></div><div class="grid"><div><article class="card"><h2>Dados da avaliação</h2><div class="fields"><div><label>Nome do aluno *</label><input id="student"></div><div><label>Turma</label><input id="classroom"></div><div><label>Ano/Série</label><input id="year"></div><div><label>Nome do projeto</label><input id="project"></div><div class="full"><label>Tema do projeto</label><input id="theme"></div><div><label>Nome do avaliador</label><input id="evaluator"></div><div><label>Data da avaliação</label><input id="date" type="date"></div></div></article><div id="criteria" class="criteria"></div><article class="card"><h2>Parecer final</h2><label>Maior ponto forte</label><input id="strength"><label>Principal ponto a desenvolver</label><input id="develop"><label>Observações da banca</label><textarea id="obs"></textarea><label>Recomendação para equipe de robótica</label><select id="recommend"><option value="">Selecione</option><option>Altamente recomendado</option><option>Recomendado</option><option>Avaliar novamente</option><option>Não recomendado neste momento</option></select></article><div class="actions"><button class="btn" id="finish">Finalizar Avaliação</button><button class="btn alt" id="clear">Limpar</button></div></div><aside class="card summary"><h2>Pontuação atual</h2><div class="score"><span id="total">0</span> / 100</div><div class="bar"><div id="bar"></div></div><div id="classify" class="class">Necessita Revisão</div><h3>Competências para Robótica</h3><div id="comp"></div></aside></div></section>
+<section id="final" class="hide"><article class="card result"><div class="top"><div><h2>Ficha Final de Avaliação</h2><p id="fs"></p></div><div id="fscore" class="finalscore"></div></div><div id="fclass" class="class"></div><div id="finfo" class="info"></div><h3>Notas por critério</h3><table><thead><tr><th>Critério</th><th>Comentário</th><th>Nota</th></tr></thead><tbody id="fcriteria"></tbody></table><h3>Competências para Robótica</h3><div id="fcomp"></div><div id="fnotes" class="notes"></div><div class="actions"><button class="btn" id="edit">Editar Avaliação</button><button class="btn alt" id="print">Imprimir Avaliação</button><button class="btn danger" id="new">Nova Avaliação</button></div></article></section></main><footer>Processo Seletivo de Robótica</footer>
+<script>
+const C=[['problema','Compreensão do Problema',15,'Clareza do problema, causas, consequências, relevância e pesquisa.'],['pesquisa','Pesquisa e Fundamentação',10,'Qualidade da pesquisa e relação com a solução.'],['stakeholders','Stakeholders e Impacto',5,'Pessoas, grupos e instituições afetadas.'],['inovacao','Criatividade e Inovação',10,'Originalidade e diferencial da solução.'],['tecnica','Solução Técnica',15,'Sensores, programação, automação, eletrônica, IoT e funcionamento.'],['prototipo','Protótipo / Simulação',15,'Funcionamento do protótipo físico/virtual: Arduino, ESP32, Wokwi, Tinkercad etc.'],['testes','Testes e Melhorias',5,'Testes, erros, correções e melhorias propostas.'],['viabilidade','Viabilidade da Solução',5,'Custos, materiais, implementação e aplicação real.'],['impacto','Impacto e Aplicação Real',5,'Uso, beneficiados e impacto.'],['apresentacao','Qualidade da Apresentação',5,'Organização, clareza visual e sequência.'],['comunicacao','Comunicação e Domínio',5,'Fala, segurança e domínio do assunto.'],['tempo','Gestão do Tempo e Conclusão',5,'Respeito ao tempo e conclusão.']];let N={},pick='',format='';const $=x=>document.getElementById(x),f=x=>Number.isInteger(x)?x:x.toLocaleString('pt-BR',{maximumFractionDigits:2}),sc=c=>N[c[0]]===undefined?0:c[2]*N[c[0]]/4,total=()=>C.reduce((s,c)=>s+sc(c),0),cl=n=>n>=90?'Excelente — Destaque':n>=80?'Muito Bom':n>=70?'Bom':n>=60?'Em Desenvolvimento':'Necessita Revisão';
+function render(){ $('criteria').innerHTML=C.map(c=>'<article class="card criterion" id="c'+c[0]+'"><div class="ctop"><h3>'+c[1]+'</h3><span class="weight">Máximo: '+c[2]+'</span></div><p class="desc">'+c[3]+'</p><div class="levels">'+['Não apresentado','Insuficiente','Em desenvolvimento','Bom','Excelente'].map((x,i)=>'<button class="level" data-c="'+c[0]+'" data-n="'+i+'"><b>'+i+'</b><br>'+x+'</button>').join('')+'</div><p><b>Pontuação: <span id="s'+c[0]+'">0</span> / '+c[2]+'</b></p><label>Comentário do avaliador (opcional)</label><textarea id="m'+c[0]+'"></textarea></article>').join('');document.querySelectorAll('.level').forEach(b=>b.onclick=()=>{N[b.dataset.c]=+b.dataset.n;document.querySelectorAll('[data-c="'+b.dataset.c+'"]').forEach(x=>x.classList.toggle('on',x===b));$('c'+b.dataset.c).classList.remove('missing');update()})}function update(){let n=total();$('total').textContent=f(n);$('bar').style.width=n+'%';$('classify').textContent=cl(n);C.forEach(c=>$('s'+c[0]).textContent=f(sc(c)));let ids=['tecnica','prototipo','comunicacao'];$('comp').innerHTML=ids.map(i=>{let c=C.find(x=>x[0]==i);return '<div class="competency"><span>'+c[1]+'</span><b>'+f(sc(c))+' / '+c[2]+'</b></div>'}).join('')}
+function val(x){return $(x).value.trim()}function finish(){let miss=C.filter(c=>N[c[0]]===undefined);if(!val('student'))return alert('Informe o nome do aluno.');if(miss.length){miss.forEach(c=>$('c'+c[0]).classList.add('missing'));$('c'+miss[0][0]).scrollIntoView({behavior:'smooth'});return alert('Avalie todos os critérios. Os pendentes foram destacados.')}summary();$('form').classList.add('hide');$('final').classList.remove('hide');scrollTo(0,0)}function summary(){let n=total();$('fs').textContent=val('student');$('fscore').textContent=f(n)+' / 100';$('fclass').textContent=cl(n);let F=[['Turma','classroom'],['Ano/Série','year'],['Projeto','project'],['Tema','theme'],['Avaliador','evaluator'],['Data','date']];$('finfo').innerHTML=F.map(x=>'<div><b>'+x[0]+'</b>'+ (val(x[1])||'Não informado')+'</div>').join('');$('fcriteria').innerHTML=C.map(c=>'<tr><td>'+c[1]+'</td><td>'+ (val('m'+c[0])||'—')+'</td><td>'+f(sc(c))+' / '+c[2]+'</td></tr>').join('');let I=['tecnica','prototipo','comunicacao'];$('fcomp').innerHTML=I.map(i=>{let c=C.find(x=>x[0]==i);return '<div class="competency"><span>'+c[1]+'</span><b>'+f(sc(c))+' / '+c[2]+'</b></div>'}).join('');$('fnotes').innerHTML=[['Maior ponto forte','strength'],['Principal ponto a desenvolver','develop'],['Observações da banca','obs'],['Recomendação final','recommend']].map(x=>'<div><b>'+x[0]+'</b>'+(val(x[1])||'Não informado')+'</div>').join('')}function reset(){document.querySelectorAll('#form input,#form textarea').forEach(x=>x.value='');$('recommend').value='';N={};document.querySelectorAll('.level').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.criterion').forEach(x=>x.classList.remove('missing'));update()}
+function publicPick(id,set){document.querySelectorAll('#'+id+' .choice').forEach(x=>x.onclick=()=>{document.querySelectorAll('#'+id+' .choice').forEach(a=>a.classList.remove('on'));x.classList.add('on');if(set==='p')pick=x.dataset.v;else format=x.dataset.v})}publicPick('projects','p');publicPick('formats','f');$('confirm').onclick=()=>{if(!val('pn')||!val('pe')||!val('pc')||!pick||!format)return alert('Preencha os dados e faça as escolhas.');$('publicok').style.display='block';$('publicok').innerHTML='<b>Escolha registrada!</b><br>Aluno: '+val('pn')+'<br>Projeto: '+pick+'<br>Formato: '+format};function pub(){$('login').classList.add('hide');$('form').classList.add('hide');$('final').classList.add('hide');$('public').classList.remove('hide')}$('goLogin').onclick=()=>{$('public').classList.add('hide');$('login').classList.remove('hide')};$('back').onclick=pub;$('exit').onclick=pub;$('enter').onclick=()=>{if(val('user')==='Macgyvers'&&$('pass').value==='TomcatF14'){$('login').classList.add('hide');$('form').classList.remove('hide')}else $('loginerr').classList.remove('hide')};$('pass').onkeydown=e=>{if(e.key==='Enter')$('enter').click()};$('finish').onclick=finish;$('clear').onclick=()=>confirm('Deseja limpar todos os dados?')&&reset();$('edit').onclick=()=>{$('final').classList.add('hide');$('form').classList.remove('hide')};$('print').onclick=()=>print();$('new').onclick=()=>{if(confirm('Deseja iniciar uma nova avaliação?')){reset();$('final').classList.add('hide');$('form').classList.remove('hide')}};render();update();
+const API='https://script.google.com/macros/s/AKfycbw4jZRn2mv0X41VkPu2LluWPJU-jipD0PqNbLf_qZ--bbZ5_2WbAgiPrtsKou_7BvnriA/exec';
+const juizesProvisorios={'gviana@sesisp.org.br':'1305'};
+const loginOriginal=$('enter').onclick;$('enter').onclick=()=>{
+  const login=val('user'),senha=$('pass').value;
+  if(juizesProvisorios[login]===senha){$('loginerr').classList.add('hide');$('login').classList.add('hide');$('form').classList.remove('hide');carregarInscritos();return}
+  loginOriginal();
+};
+async function enviarInscricao(){
+  if(!val('pn')||!val('pe')||!val('pc')||!pick||!format){alert('Preencha os dados e faça as escolhas.');return}
+  const dados={type:'inscricao',nome:val('pn'),email:val('pe'),turma:val('pc'),projeto:pick,formato:format};
+  $('confirm').disabled=true;$('confirm').textContent='Enviando inscrição...';
+  try{await fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(dados)});$('publicok').style.display='block';$('publicok').innerHTML='<b>Inscrição enviada com sucesso!</b><br>Aluno: '+dados.nome+'<br>Projeto: '+dados.projeto+'<br>Formato: '+dados.formato}
+  catch(e){alert('Não foi possível enviar a inscrição. Verifique sua conexão e tente novamente.')}
+  finally{$('confirm').disabled=false;$('confirm').textContent='Confirmar escolha'}
+}
+$('confirm').onclick=enviarInscricao;
+async function carregarInscritos(){
+  try{
+    const resposta=await fetch(API+'?action=inscricoes');
+    const lista=await resposta.json();
+    let seletor=$('registeredStudents');
+    if(!seletor){
+      seletor=document.createElement('select');seletor.id='registeredStudents';
+      const rotulo=document.createElement('label');rotulo.textContent='Selecionar aluno inscrito';
+      const alvo=$('student').parentElement.parentElement;
+      alvo.parentElement.insertBefore(rotulo,alvo);alvo.parentElement.insertBefore(seletor,alvo);
+      seletor.onchange=()=>{const aluno=lista.find(a=>a.ID===seletor.value);if(!aluno)return;$('student').value=aluno['Nome do aluno']||'';$('classroom').value=aluno.Turma||'';$('project').value=aluno.Projeto||''};
     }
-
-    body {
-      background: #f5f5f5;
-      color: #222;
-    }
-
-    header {
-      background: #e30613;
-      color: white;
-      padding: 28px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin-bottom: 8px;
-      font-size: 28px;
-    }
-
-    header p {
-      opacity: 0.95;
-    }
-
-    .logo-sesi {
-      width: 150px;
-      max-width: 70%;
-      height: auto;
-      display: block;
-      margin: 0 auto 18px;
-      background: white;
-      padding: 8px;
-      border-radius: 8px;
-    }
-
-    .container {
-      width: min(1000px, 92%);
-      margin: 30px auto;
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      border-top: 4px solid #e30613;
-    }
-
-    .card h2 {
-      margin-bottom: 12px;
-      color: #e30613;
-    }
-
-    .info {
-      line-height: 1.6;
-    }
-
-    .projetos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .projeto {
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      padding: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-      background: #fff;
-    }
-
-    .projeto:hover {
-      border-color: #e30613;
-      transform: translateY(-2px);
-    }
-
-    .projeto.selecionado {
-      border-color: #e30613;
-      background: #fff0f1;
-    }
-
-    .projeto h3 {
-      margin-bottom: 10px;
-      color: #e30613;
-    }
-
-    .projeto p {
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 11px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-bottom: 14px;
-      font-size: 15px;
-      background: white;
-    }
-
-    .formato-apresentacao {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin: 10px 0 18px;
-    }
-
-    .opcao-apresentacao {
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      padding: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-      background: #fff;
-    }
-
-    .opcao-apresentacao:hover {
-      border-color: #e30613;
-    }
-
-    .opcao-apresentacao.selecionado {
-      border-color: #e30613;
-      background: #fff0f1;
-    }
-
-    .opcao-apresentacao h3 {
-      margin-bottom: 6px;
-      color: #e30613;
-    }
-
-    .opcao-apresentacao p {
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 8px;
-      padding: 13px;
-      background: #e30613;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #b8000a;
-    }
-
-    .resultado {
-      display: none;
-      margin-top: 20px;
-      padding: 18px;
-      background: #e8f5e9;
-      border-left: 5px solid #2e7d32;
-      border-radius: 8px;
-      line-height: 1.6;
-    }
-
-    .etapas {
-      margin-top: 10px;
-      padding-left: 22px;
-      line-height: 1.6;
-    }
-
-    .etapas li {
-      margin-bottom: 16px;
-      padding-left: 4px;
-    }
-
-    .etapas strong {
-      color: #e30613;
-    }
-
-    footer {
-      text-align: center;
-      padding: 24px;
-      color: #555;
-      font-size: 14px;
-      border-top: 3px solid #e30613;
-      background: white;
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <img
-      class="logo-sesi"
-      src="https://mogidascruzes.sesisp.org.br/images/logo-sesi-bot.jpg"
-      alt="Logo SESI"
-    />
-    <h1>Processo Seletivo da Robótica</h1>
-    <p>Faça parte da Equipe de Robótica da Escola SESI Milton Sobrosa Cordeiro</p>
-  </header>
-
-  <main class="container">
-
-    <section class="card">
-      <h2>Como funciona?</h2>
-      <div class="info">
-        <p>
-          Escolha uma das propostas abaixo. Depois, desenvolva sua ideia,
-          pesquise o problema, pense em uma solução e prepare uma apresentação
-          de até 5 minutos.
-        </p>
-        <p><strong>Apresentação:</strong> 26 de Outubro a 30 de Outubro.</p>
-        <p><strong>Formato:</strong> Individual.</p>
-        <p><strong>Dúvidas:</strong> Procurar o OED Ricardo ou TLD Gustavo Viana.</p>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>1. Escolha seu projeto</h2>
-
-      <div class="projetos">
-
-        <div class="projeto" data-projeto="Estação IoT de Monitoramento Inteligente">
-          <h3>Projeto 1</h3>
-          <p><strong>Estação IoT de Monitoramento Inteligente</strong></p>
-          <p>Monitorar temperatura, umidade, luminosidade e qualidade do ar utilizando sensores.</p>
-        </div>
-
-        <div class="projeto" data-projeto="Linha de Produção Automatizada com Esteira">
-          <h3>Projeto 2</h3>
-          <p><strong>Linha de Produção Automatizada</strong></p>
-          <p>Criar uma esteira que detecta e separa objetos automaticamente.</p>
-        </div>
-
-        <div class="projeto" data-projeto="Estufa Inteligente com Controle Climático">
-          <h3>Projeto 3</h3>
-          <p><strong>Estufa Inteligente</strong></p>
-          <p>Controlar temperatura, umidade e irrigação de uma estufa automaticamente.</p>
-        </div>
-
-        <div class="projeto" data-projeto="Robô Autônomo de Navegação Inteligente">
-          <h3>Projeto 4</h3>
-          <p><strong>Robô Autônomo</strong></p>
-          <p>Criar um robô capaz de seguir linha, detectar obstáculos e decidir uma rota.</p>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>2. Identificação</h2>
-
-      <label for="nome">Nome do aluno</label>
-      <input type="text" id="nome" placeholder="Digite seu nome completo" />
-
-      <label for="email">E-mail</label>
-      <input type="email" id="email" placeholder="Digite seu e-mail" />
-
-      <label for="turma">Turma</label>
-      <select id="turma">
-        <option value="">Selecione sua turma</option>
-        <option value="6A">6A</option>
-        <option value="6B">6B</option>
-        <option value="7A">7A</option>
-        <option value="7B">7B</option>
-        <option value="8A">8A</option>
-        <option value="8B">8B</option>
-        <option value="9A">9A</option>
-        <option value="9B">9B</option>
-      </select>
-
-      <label>Formato da apresentação</label>
-
-      <div class="formato-apresentacao">
-        <div class="opcao-apresentacao" data-formato="Apresentação Física">
-          <h3>Apresentação Física</h3>
-          <p>Apresentação presencial utilizando materiais físicos, cartazes, protótipos ou outros recursos.</p>
-        </div>
-
-        <div class="opcao-apresentacao" data-formato="Ferramentas Online">
-          <h3>Ferramentas Online</h3>
-          <p>Apresentação utilizando PowerPoint ou outra ferramenta computacional de apresentação.</p>
-        </div>
-
-        <div class="opcao-apresentacao" data-formato="Apresentação Física e Online">
-          <h3>Apresentação Física e Online</h3>
-          <p>Apresentação combinando materiais físicos, protótipos ou cartazes com PowerPoint ou outras ferramentas online.</p>
-        </div>
-      </div>
-
-      <button onclick="confirmarEscolha()">Confirmar escolha</button>
-
-      <div class="resultado" id="resultado"></div>
-    </section>
-
-    <section class="card">
-      <h2>3. O que apresentar?</h2>
-
-      <ol class="etapas">
-        <li>
-          <strong>Definição do problema</strong><br>
-          Pesquise e explique qual problema será estudado, sua gravidade, suas causas e por que ele é importante.
-          A IA pode ser utilizada como apoio, mas não deve realizar toda a pesquisa.
-        </li>
-
-        <li>
-          <strong>Análise dos envolvidos / stakeholders</strong><br>
-          Identifique quem pode ser afetado ou se beneficiar da solução, como comunidade, empresas, organizações ou governos.
-          Considere as necessidades, perspectivas e limitações desses grupos.
-        </li>
-
-        <li>
-          <strong>Pesquisa técnica e prototipagem</strong><br>
-          Pesquise quais tecnologias existentes ou emergentes podem ser aplicadas ao projeto.
-          Apresente a base do protótipo, os testes realizados e possíveis melhorias feitas durante o desenvolvimento.
-        </li>
-
-        <li>
-          <strong>Desenvolvimento da solução</strong><br>
-          Explique como a solução foi desenvolvida, considerando a viabilidade técnica, os custos envolvidos e a possibilidade
-          de ampliar ou adaptar o projeto.
-        </li>
-
-        <li>
-          <strong>Implementação</strong><br>
-          Mostre como a solução poderia ser aplicada em uma situação real ou em escala local.
-          Indique também quais parcerias, recursos ou apoios seriam necessários.
-        </li>
-
-        <li>
-          <strong>Comunicação e divulgação</strong><br>
-          Explique como o projeto será apresentado ao público utilizando slides, folhetos, vídeos ou outros materiais.
-          Pense também em formas de divulgar o trabalho em eventos locais ou regionais.
-        </li>
-
-        <li>
-          <strong>Avaliação e melhorias</strong><br>
-          Mostre como seria possível medir o impacto da solução por meio de métricas e resultados práticos.
-          Apresente também os pontos que ainda podem ser melhorados e possíveis oportunidades futuras.
-        </li>
-
-        <li>
-          <strong>Conclusão</strong><br>
-          Faça um resumo da solução desenvolvida e apresente os principais resultados obtidos com o projeto.
-        </li>
-      </ol>
-    </section>
-
-  </main>
-
-  <footer>
-    Processo Seletivo de Robótica
-  </footer>
-
-  <script>
-    let projetoSelecionado = "";
-    let formatoSelecionado = "";
-
-    const projetos = document.querySelectorAll(".projeto");
-
-    projetos.forEach(projeto => {
-      projeto.addEventListener("click", () => {
-
-        projetos.forEach(item => {
-          item.classList.remove("selecionado");
-        });
-
-        projeto.classList.add("selecionado");
-        projetoSelecionado = projeto.dataset.projeto;
-      });
-    });
-
-    const formatos = document.querySelectorAll(".opcao-apresentacao");
-
-    formatos.forEach(formato => {
-      formato.addEventListener("click", () => {
-
-        formatos.forEach(item => {
-          item.classList.remove("selecionado");
-        });
-
-        formato.classList.add("selecionado");
-        formatoSelecionado = formato.dataset.formato;
-      });
-    });
-
-    function confirmarEscolha() {
-      const nome = document.getElementById("nome").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const turma = document.getElementById("turma").value.trim();
-      const resultado = document.getElementById("resultado");
-
-      if (!nome || !email || !turma) {
-        alert("Preencha seu nome completo, e-mail e turma.");
-        return;
-      }
-
-      const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-      if (!emailValido) {
-        alert("Digite um e-mail válido.");
-        return;
-      }
-
-      if (!projetoSelecionado) {
-        alert("Escolha um projeto.");
-        return;
-      }
-
-      if (!formatoSelecionado) {
-        alert("Escolha o formato da apresentação.");
-        return;
-      }
-
-      resultado.style.display = "block";
-
-      resultado.innerHTML = `
-        <strong>Escolha registrada!</strong><br><br>
-        Aluno: ${nome}<br>
-        E-mail: ${email}<br>
-        Turma: ${turma}<br>
-        Projeto escolhido: <strong>${projetoSelecionado}</strong><br>
-        Formato da apresentação: <strong>${formatoSelecionado}</strong><br><br>
-        Agora prepare sua proposta e sua apresentação.
-      `;
-
-      resultado.scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-  </script>
-
-</body>
-</html>
+    seletor.innerHTML='<option value="">Selecione uma inscrição</option>'+lista.map(a=>'<option value="'+(a.ID||'')+'">'+(a['Nome do aluno']||'Aluno')+' — '+(a.Turma||'')+'</option>').join('');
+  }catch(e){console.warn('Não foi possível carregar inscrições',e)}
+}
+const entrarOriginal=$('enter').onclick;$('enter').onclick=()=>{entrarOriginal();if(!$('form').classList.contains('hide'))carregarInscritos()};
+const finalizarOriginal=$('finish').onclick;$('finish').onclick=async()=>{
+  if(!val('student')||C.some(c=>N[c[0]]===undefined)){finalizarOriginal();return}
+  const dados={type:'avaliacao',inscricaoId:$('registeredStudents')?.value||'',aluno:val('student'),avaliador:val('evaluator'),nota:total(),classificacao:cl(total()),recomendacao:val('recommend'),criterios:Object.fromEntries(C.map(c=>[c[1],sc(c)]))};
+  try{await fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(dados)})}catch(e){console.warn('Avaliação não enviada',e)}
+  finalizarOriginal();
+};
+async function autenticarJuiz(){
+  const login=val('user'),senha=$('pass').value;
+  if(!login||!senha){$('loginerr').textContent='Informe login e senha.';$('loginerr').classList.remove('hide');return}
+  try{
+    const resposta=await fetch(API+'?action=login&login='+encodeURIComponent(login)+'&senha='+encodeURIComponent(senha));
+    const dados=await resposta.json();
+    if(!dados.ok){$('loginerr').textContent='Login ou senha inválidos.';$('loginerr').classList.remove('hide');return}
+    $('loginerr').classList.add('hide');$('login').classList.add('hide');$('form').classList.remove('hide');
+    if(dados.nome)$('evaluator').value=dados.nome;
+    carregarInscritos();
+  }catch(e){$('loginerr').textContent='Não foi possível validar o acesso à planilha.';$('loginerr').classList.remove('hide')}
+}
+$('enter').onclick=autenticarJuiz;$('pass').onkeydown=e=>{if(e.key==='Enter')autenticarJuiz()};
+const identidade=document.createElement('style');identidade.textContent='.logo{padding:0!important;background:transparent!important;border-radius:0!important;mix-blend-mode:screen}footer span{display:inline-block;margin-top:5px;font-size:.9em;opacity:.88}';document.head.appendChild(identidade);
+document.querySelector('footer').innerHTML='Processo Seletivo de Robótica<br><span>Técnicos: Ricardo Rodrigues e Gustavo Viana</span>';
+document.querySelector('.logo').src='sesi-logo.png';
+</script></body></html>
